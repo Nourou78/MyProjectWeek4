@@ -2,11 +2,12 @@ library(reshape2)
 
 filename <- "getdata_dataset.zip"
 
-## Download and unzip the dataset:
+## Download the dataset:
 if (!file.exists(filename)){
   fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip "
   download.file(fileURL, filename, method="curl")
 }  
+# Unzip the dataset
 if (!file.exists("UCI HAR Dataset")) { 
   unzip(filename) 
 }
@@ -47,4 +48,5 @@ allData$subject <- as.factor(allData$subject)
 allData.melted <- melt(allData, id = c("subject", "activity"))
 allData.mean <- dcast(allData.melted, subject + activity ~ variable, mean)
 
+# Create txt file that contain the tidy data
 write.table(allData.mean, "tidy_data.txt", row.names = FALSE, quote = FALSE)
