@@ -37,8 +37,9 @@ testActivities <- read.table("UCI HAR Dataset/test/Y_test.txt")
 testSubjects <- read.table("UCI HAR Dataset/test/subject_test.txt")
 test <- cbind(testSubjects, testActivities, test)
 
-# merge datasets and add labels
+# merge datasets
 allData <- rbind(train, test)
+# add labels
 colnames(allData) <- c("subject", "activity", featuresWanted.names)
 
 # turn activities & subjects into factors
